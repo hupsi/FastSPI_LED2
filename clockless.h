@@ -61,7 +61,7 @@ public:
 		// First cycle
 		FastPin<DATA_PIN>::fastset(port, hi); 								// 1/2 clock cycle if using out
 		delaycycles<T1 - (_CYCLES(DATA_PIN) + 1)>();					// 1st cycle length minus 1/2 clock for out, 1 clock for sbrs
-		__asm__ __volatile__ ("sbrs %0, %1" :: "r" (b), "M" (N) :); 	// 1 clock for check (+1 if skipping, next op is also 1 clock)
+		__asm__ __volatile__ ("sbrs %0, %1" :: "r" (b), "M" (N) :); 	// 1 clock for check (+1 if skippine, next op is also 1 clock)
 
 		// Second cycle
 		FastPin<DATA_PIN>::fastset(port, lo);								// 1/2 clock cycle if using out
@@ -77,7 +77,7 @@ public:
 	template <int N, int ADJ>inline static void bitSetLast(register data_ptr_t port, register data_t hi, register data_t lo, register uint8_t b) { 
 		// First cycle
 		FastPin<DATA_PIN>::fastset(port, hi); 							// 1 clock cycle if using out, 2 otherwise
-		delaycycles<T1 - (_CYCLES(DATA_PIN) + 1)>();					// 1st cycle length minus 1 clock for out, 1 clock for sbrs
+		delaycycles<T1 - (_CYCLES(DATA_PIN) + 1) + 1>();					// 1st cycle length minus 1 clock for out, 1 clock for sbrs
 		__asm__ __volatile__ ("sbrs %0, %1" :: "r" (b), "M" (N) :); // 1 clock for check (+1 if skipping, next op is also 1 clock)
 
 		// Second cycle
@@ -86,7 +86,7 @@ public:
 
 		// Third cycle
 		FastPin<DATA_PIN>::fastset(port, lo);							// 1/2 clock cycle if using out
-		delaycycles<T3 - (_CYCLES(DATA_PIN) + ADJ)>();				// 3rd cycle length minus 7 clocks for out, loop compare, jump, next uint8_t load
+		delaycycles<T3 - (_CYCLES(DATA_PIN) + ADJ) + 1>();				// 3rd cycle length minus 7 clocks for out, loop compare, jump, next uint8_t load
 	}
 #endif
 

@@ -239,16 +239,16 @@ class TM1809Controller800Mhz : public ClocklessController<DATA_PIN, NS(350), NS(
 template <uint8_t DATA_PIN, EOrder RGB_ORDER = RGB>
 class TM1809Controller800Khz : public ClocklessController<DATA_PIN, NS(350), NS(350), NS(550), RGB_ORDER> {};
 #if NO_TIME(350, 350, 550) 
-#warning "No enough clock cycles available for the UCS103"
+#warning "No enough clock cycles available for the TM1809"
 #endif
 
 // WS2811 - 350n, 350ns, 550ns
 template <uint8_t DATA_PIN, EOrder RGB_ORDER = RGB>
-class WS2811Controller800Mhz : public ClocklessController<DATA_PIN, NS(320), NS(320), NS(550), RGB_ORDER> {};
+class WS2811Controller800Mhz : public ClocklessController<DATA_PIN, NS(350), NS(350), NS(550), RGB_ORDER> {};
 template <uint8_t DATA_PIN, EOrder RGB_ORDER = RGB>
-class WS2811Controller800Khz : public ClocklessController<DATA_PIN, NS(320), NS(320), NS(550), RGB_ORDER> {};
-#if NO_TIME(320, 320, 550) 
-#warning "No enough clock cycles available for the UCS103"
+class WS2811Controller800Khz : public ClocklessController<DATA_PIN, NS(350), NS(350), NS(550), RGB_ORDER> {};
+#if NO_TIME(350, 350, 550) 
+#warning "No enough clock cycles available for the WS2811"
 #endif
 
 // 750NS, 750NS, 750NS
@@ -257,7 +257,7 @@ class TM1803Controller400Mhz : public ClocklessController<DATA_PIN, NS(750), NS(
 template <uint8_t DATA_PIN, EOrder RGB_ORDER = RGB>
 class TM1803Controller400Khz : public ClocklessController<DATA_PIN, NS(750), NS(750), NS(750), RGB_ORDER> {};
 #if NO_TIME(750, 750, 750) 
-#warning "No enough clock cycles available for the UCS103"
+#warning "No enough clock cycles available for the TM1803"
 #endif
 
 #endif
